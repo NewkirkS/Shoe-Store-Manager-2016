@@ -96,6 +96,13 @@
     });
 
     //store detail PATCH to update store, return to store detail
+    $app->patch("/update_store/{id}", function($id) use ($app){
+        $store = Store::find($id);
+        $new_name = $_POST['name'];
+        $store->update($new_name);
+        return $app['twig']->render('store.html.twig', array("all_brands" => Brand::getAll(), "store_brands" => $store->getBrands(), "store" => $store));
+    });
+
 
     //store detail DELETE to delete individual store. return to stores home
 

@@ -18,6 +18,13 @@
         <hr>
         {% endif %}
 
+        <form action="/update_store/{{ store.getId }}" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <label for="name">Change Name</label>
+            <input type="text" name="name">
+            <button type="submit">Change</button>
+        </form>
+
         {% if all_brands is not empty %}
         <form action="/add_brand" method="post">
             <input name="store_id" type="hidden" value="{{ store.getId }}">
