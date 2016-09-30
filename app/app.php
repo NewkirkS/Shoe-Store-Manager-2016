@@ -47,10 +47,18 @@
         return $app['twig']->render('brands.html.twig', array("brands" => Brand::getAll()));
     });
 
-    // Brand detail GET to display name of brand and form to add store
-
+    // Brand detail GET to display name of brand and form to add store Pass in: ALL STORES, BRAND STORES, BRAND
+    $app->get("/brand/{id}", function($id) use ($app) {
+        $brand = Brand::find($id);
+        return $app['twig']->render('brand.html.twig', array("all_stores" => Store::getAll(), "brand_stores" => $brand->getStores(), "brand" => $brand));
+    });
     //Brand detail POST to add a store and return to brand detail
-
+    $app->post("/add_store", function() use ($app) {
+        $brand = Brand::find($_POST['brand_id']);
+        $store = Store::find($_POST['store_id']);
+        $brand->addStore($store);
+        return $app['twig']->render('brand.html.twig', array("all_stores" => Store::getAll(), "brand_stores" => $brand->getStores(), "brand" => $brand));
+    });
 
     //STORE ROUTES
 
