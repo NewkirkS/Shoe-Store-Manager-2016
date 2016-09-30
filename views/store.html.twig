@@ -38,6 +38,11 @@
         </form>
         {% endif %}
 
+        <form action="/delete_store/{{ store.getId }}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete Store</button>
+        </form>
+
         <a href="/stores">STORES</a>
         <a href="/">HOME</a>
     </body>

@@ -73,9 +73,8 @@
 
         function delete()
         {
-            $GLOBALS['DB']->exec("DELETE stores.*, brands_stores.* FROM stores
-            INNER JOIN brands_stores
-            WHERE stores.id = {$this->getId()} OR brands_stores.store_id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM brands_stores WHERE store_id = {$this->getId()};");
         }
 
         function addBrand($brand)
