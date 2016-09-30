@@ -63,7 +63,9 @@
     //STORE ROUTES
 
     //Stores home GET, contains list of all stores and form to add new stores
-
+    $app->get("/stores", function() use ($app) {
+        return $app['twig']->render('stores.html.twig', array("stores" => Store::getAll()));
+    });
     //Stores home POST, adds new store and returns to stores home
 
     //Stores home POST to delete all stores.
