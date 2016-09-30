@@ -66,9 +66,20 @@
     $app->get("/stores", function() use ($app) {
         return $app['twig']->render('stores.html.twig', array("stores" => Store::getAll()));
     });
+
     //Stores home POST, adds new store and returns to stores home
+    $app->post("/stores", function() use ($app) {
+        $name = $_POST['name'];
+        $new_store = new Store($name);
+        $new_store->save();
+        return $app['twig']->render('stores.html.twig', array("stores" => Store::getAll()));
+    });
 
     //Stores home POST to delete all stores.
+    $app->post("/delete_stores", function() use ($app) {
+        Store::deleteAll();
+        return $app['twig']->render('stores.html.twig', array("stores" => Store::getAll()));
+    });
 
     //Store detail GET, displays store name, forms to add brands, delete or edit.
 
