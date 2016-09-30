@@ -42,6 +42,10 @@
     });
 
     //Brands home POST, to delete all brands. Pass in: ALL BRANDS
+    $app->post("/delete_brands", function() use ($app) {
+        Brand::deleteAll();
+        return $app['twig']->render('brands.html.twig', array("brands" => Brand::getAll()));
+    });
 
     // Brand detail GET to display name of brand and form to add store
 
