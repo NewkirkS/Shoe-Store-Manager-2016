@@ -20,7 +20,42 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+    //Home, bifurcates to view stores or brands
+
     $app->get("/", function() use ($app) {
-   return $app['twig']->render('index.html.twig');
-   });
+        return $app['twig']->render('index.html.twig');
+    });
+
+   //BRAND ROUTES
+
+   //Brands home GET, lists all brands and allows adding a brand
+
+    $app->get("/brands", function() use ($app) {
+        return $app['twig']->render('brands.html.twig');
+    });
+
+    //Brands home POST, for sumbitting a new brand
+
+    //Brands home POST, to delete all brands
+
+    // Brand detail GET to display name of brand and form to add store
+
+    //Brand detail POST to add a store and return to brand detail
+
+
+    //STORE ROUTES
+
+    //Stores home GET, contains list of all stores and form to add new stores
+
+    //Stores home POST, adds new store and returns to stores home
+
+    //Stores home POST to delete all stores.
+
+    //Store detail GET, displays store name, forms to add brands, delete or edit.
+
+    //store detail POST to add a brand and return store detail
+
+    //store detail PATCH to update store, return to store detail
+
+    //store detail DELETE to delete individual store. return to stores home
  ?>
