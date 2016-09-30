@@ -82,8 +82,18 @@
     });
 
     //Store detail GET, displays store name, forms to add brands, delete or edit.
+    $app->get("/store/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        return $app['twig']->render('store.html.twig', array("all_brands" => Brand::getAll(), "store_brands" => $store->getBrands(), "store" => $store));
+    });
 
     //store detail POST to add a brand and return store detail
+    $app->post("/add_brand", function() use ($app) {
+        $brand = Brand::find($_POST['brand_id']);
+        $store = Store::find($_POST['store_id']);
+        $store->addBrand($brand);
+        return $app['twig']->render('store.html.twig', array("all_brands" => Brand::getAll(), "store_brands" => $store->getBrands(), "store" => $store));
+    });
 
     //store detail PATCH to update store, return to store detail
 
