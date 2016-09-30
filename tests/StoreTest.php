@@ -6,6 +6,7 @@
     */
 
     require_once "src/Store.php";
+    require_once "src/Brand.php";
 
     $server = 'mysql:host=localhost;dbname=shoes_test';
     $username = 'root';
@@ -14,11 +15,11 @@
 
     class StoreTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Brand::deleteAll();
-        //     Store::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Brand::deleteAll();
+            Store::deleteAll();
+        }
 
         function test_getName()
         {
@@ -60,6 +61,58 @@
             //Assert
             $this->assertEquals($id, $result);
         }
+
+        function test_save()
+       {
+           //Arrange
+           $id = 1;
+           $name = "Shoe Empire";
+           $test_store = new Store($name, $id);
+
+           //Act
+           $test_store->save();
+           $result = Store::getAll();
+
+           //Assert
+           $this->assertEquals([$test_store], $result);
+       }
+
+       function test_getAll()
+      {
+          //Arrange
+          $name = "Heavenly Boots";
+          $test_store = new Store($name);
+          $test_store->save();
+
+          $name2 = "Spider Shoes";
+          $test_store2 = new Store($name2);
+          $test_store2->save();
+
+          //Act
+          $result = Store::getAll();
+
+          //Assert
+          $this->assertEquals([$test_store, $test_store2], $result);
+      }
+
+      function test_deleteAll()
+     {
+         //Arrange
+         $name = "Heavenly Boots";
+         $test_store = new Store($name);
+         $test_store->save();
+
+         $name2 = "Spider Shoes";
+         $test_store2 = new Store($name2);
+         $test_store2->save();
+
+         //Act
+         $result = Store::getAll();
+
+         //Assert
+         $this->assertEquals([$test_store, $test_store2], $result);
+     }
+
     }
 
  ?>
