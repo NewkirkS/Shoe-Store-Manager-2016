@@ -66,12 +66,15 @@
 
         function update($new_name)
         {
-
+            $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
 
         function delete()
         {
-
+            $GLOBALS['DB']->exec("DELETE stores.*, brands_stores.* FROM stores
+            INNER JOIN brands_stores
+            WHERE stores.id = {$this->getId()} OR brands_stores.store_id = {$this->getId()};");
         }
 
         function addBrand($brand)
