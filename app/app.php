@@ -28,15 +28,20 @@
 
    //BRAND ROUTES
 
-   //Brands home GET, lists all brands and allows adding a brand
-
+   //Brands home GET, lists all brands and allows adding a brand. Pass in: ALL BRANDS
     $app->get("/brands", function() use ($app) {
-        return $app['twig']->render('brands.html.twig');
+        return $app['twig']->render('brands.html.twig', array("brands" => Brand::getAll()));
     });
 
-    //Brands home POST, for sumbitting a new brand
+    //Brands home POST, for sumbitting a new brand. Pass in: ALL BRANDS
+    $app->post("/brands", function() use ($app) {
+        $name = $_POST['name'];
+        $new_brand = new Brand($name);
+        $new_brand->save();
+        return $app['twig']->render('brands.html.twig', array("brands" => Brand::getAll()));
+    });
 
-    //Brands home POST, to delete all brands
+    //Brands home POST, to delete all brands. Pass in: ALL BRANDS
 
     // Brand detail GET to display name of brand and form to add store
 
@@ -58,4 +63,6 @@
     //store detail PATCH to update store, return to store detail
 
     //store detail DELETE to delete individual store. return to stores home
+
+    return $app;
  ?>
