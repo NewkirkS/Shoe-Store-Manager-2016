@@ -8,12 +8,12 @@
         function __construct($name, $id = null)
         {
             $this->name = $name;
-            $this->$id = $id;
+            $this->id = $id;
         }
 
         function getId()
         {
-            return $this->Id;
+            return $this->id;
         }
 
         function getName()
@@ -53,7 +53,7 @@
 
         function delete()
         {
-            
+
         }
 
         function addBrands($brand)

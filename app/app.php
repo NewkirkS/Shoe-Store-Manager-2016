@@ -8,7 +8,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=to_do';
+    $server = 'mysql:host=localhost;dbname=shoes';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
